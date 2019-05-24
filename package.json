@@ -1,0 +1,18 @@
+{
+  "name": "superfarmer",
+  "version": "1.0.0",
+  "description": "Superfarmer game written in JS by rednaxela700",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "farmer",
+    "karol",
+    "borsuk",
+    "game",
+    "rednaxela700"
+  ],
+  "author": "Alexander Walczuk",
+  "license": "ISC"
+}
