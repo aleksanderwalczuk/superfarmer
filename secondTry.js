@@ -32,7 +32,7 @@ function addUserAnimal(userAnimal) {
     return animalAdd;
 }
 
-function searchUserAnimals() {
+function searchUserAnimals() {//function doesn't clear animalsInArray
     var rabbitsInArray = 0;
     var sheepsInArray = 0;
     var pigsInArray = 0;
@@ -47,7 +47,7 @@ function searchUserAnimals() {
             pigsInArray++;
             // console.log(pigsInArray + "pig");
         } else {
-            console.log("\telse logged ")
+            console.log("\telse logged in searchUserAnimals")
         }
     }
 
@@ -55,6 +55,9 @@ function searchUserAnimals() {
     var sheepStatMessage = sheepsInArray + " sheeps\n";
     var pigsStatMessage = pigsInArray + " pigs";
     console.log("There are:\n" + rabbitStatMessage + sheepStatMessage + pigsStatMessage);
+    // rabbitsInArray = 0;
+    // sheepsInArray = 0;
+    // pigsInArray = 0;
 
 }
 
@@ -67,6 +70,22 @@ function addDog(dogType) {
     } else {
         return false;
     }
+}
+
+
+//kill an animal in certian array
+function kill (field, target) {
+        var arrayName = field;
+        var animal = target;
+    arrayName.splice(arrayName.indexOf(animal));
+
+}
+//wolf killing animals
+function wolfKilling () {
+    kill(userAnimals, "cow");
+    kill(userAnimals, "pig");
+    kill(userAnimals, "sheep");
+    return "rabbit"
 }
 //kill dog or proceed
 
@@ -91,7 +110,7 @@ function checkDog() {
             myLog("checkDog - THERE IS NO DOG, KILL ANIMALS.")
         }
     }
-    killDog();
+// killing dog here?
 }
 //check if and dog exist and kill if needed
 function checkDog2(dogType, killDog) {
@@ -104,10 +123,22 @@ function checkDog2(dogType, killDog) {
             if (userDogs[i] == "hound") {
                 hound++;
                 if (killDog == "hound") {
-                    userDogs.splice("hound");
+                    hound--;
+                } else if (killDog == false) {
+                    return false;
+                }
+                else {
+                    wolfKilling(); //function that kills all animals except rabbits, smallDogs and horse
                 }
             } else if (userDogs[i] == "smallDog") {
                 smallDog++;
+                if (killDog == "smallDog") {
+                    smallDog--;
+                } else if (killDog == false) {
+                    return false;
+                } else {
+                    kill(userAnimals, "rabbit"); //erase rabbits from array
+                }
             }
             // userDogs.splice([i]); //probably removes this item from array
             // myLog("checkDog2. Should remove this - [i] dog");
@@ -121,7 +152,15 @@ function checkDog2(dogType, killDog) {
 
 
 }
-
+function checkDog3 (dogType) {
+    var dog = dogType;
+    var dogInArray = userDogs.indexOf(dog);
+    if (dogInArray > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 function grow(num) {
     addUserAnimal(num);
     myLog("\tf grow");
@@ -129,10 +168,41 @@ function grow(num) {
 
 function decrease() {
     myLog("\tf decrease");
+    if (checkDog3("hound" == true)) {
+    kill(userDogs, "hound");
+} else if (checkDog3("smallDog") == true) {
+    kill(userDogs, "smallDog");
+} else if (checkDog3("hound") == false) {
+    wolfKilling();
+} else if (checkDog3("smallDog") == false) {
+    kill(userDogs, "smallDog");
+} else {
+    console.log("FATAL, this is funciton decrease else condition")
+}
 }
 
-function growAndDecrease() {
+function growAndDecrease(enemy) {
     myLog("\tf growAndDecrease");
+    var  agressor = enemy
+    if (agressor == "wolf") {
+        console.log("WOLF ATTACKS!")
+        if (userDogs.indexOf("hound") > 0) {
+            kill(userDogs, "hound")
+        } else {
+            console.log("wolf eats your animals");
+            wolfKilling();
+        }
+    } else if (agressor == "fox") {
+        console.log("FOX ATTACKS");
+        if (userDogs.indexOf("smallDog") > 0) {
+            kill(userDogs, "smallDog");
+        } else {
+            kill(userAnimals, "rabbit");
+        }
+
+    } else {
+        console.log("growAndDecrease FATAL ERROR");
+    }
 }
 
 //generate random dices output
@@ -148,29 +218,36 @@ function rollDice(dice) {
 }
 
 //invoke grow, decrease or growAndDecrease depending on situation
+
+//yellowDice rolls first
 function diceMatch() {
     var result;
-    growAndDecreaseConditions = yellowDiceResult != "wolf" || redDiceResult != "fox";
     var yellowDiceResult = rollDice(yellowDice);
     var redDiceResult = rollDice(redDice);
     var diceResultLog = [yellowDiceResult, redDiceResult];
     if (yellowDiceResult == redDiceResult) {
         //grow(result);
-        addUserAnimal(yellowDiceResult)
+        
         myLog("GROW !")
-    } else if (yellowDiceResult = !"wolf" && redDiceResult != "fox") { // add more possibilities
-        grow();
+        return addUserAnimal(yellowDiceResult)
+    } else if (yellowDiceResult != "wolf" && redDiceResult != "fox") { // add more possibilities
+        return grow();
     } else if (yellowDiceResult == "wolf" && redDiceResult == "fox") {
-        decrease();
-    } else if (growAndDecreaseConditions) {
-        growAndDecrease();
+        return decrease();
+    } else if (yellowDiceResult != "wolf" && redDiceResult == "fox" || yellowDiceResult == "wolf" && redDiceResult != "fox") {
+        if (yellowDiceResult == "wolf") {
+            growAndDecrease("wolf");
+        } else {
+            growAndDecrease("fox");
+        }
+
     } else {
         myLog("f diceMatch else condition");
     }
 
 
     console.log("Dice result is: " + diceResultLog)
-    // return result;
+    // return diceResultLog;
 
 
 
