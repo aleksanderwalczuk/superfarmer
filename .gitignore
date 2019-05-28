@@ -329,6 +329,7 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 # my gitignore
-*.idea/
 *.vscode
 .DS_Store
+*.css.map
+.gitignore
