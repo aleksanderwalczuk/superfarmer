@@ -4,7 +4,8 @@
   "description": "Superfarmer game written in JS by rednaxela700",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path sass styles.sass   styles.css"
   },
   "keywords": [
     "farmer",
@@ -14,5 +15,8 @@
     "rednaxela700"
   ],
   "author": "Alexander Walczuk",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.13.1"
+  }
 }
