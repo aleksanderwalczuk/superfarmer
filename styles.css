@@ -26,6 +26,7 @@
 }
 
 .btn__trade {
+  display: none;
   height: 60px;
   width: 60px;
   padding: 0;
