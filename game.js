@@ -117,6 +117,11 @@ function throwDices() {
     updateAside()
     resetBoard()
     render(player)
+    exchangePossible() ? popTradeAvailable() : ''
+}
+
+function popTradeAvailable() {
+    console.log('this is a trade window')
 }
 
 function exchangePossible(animalsArr) {
