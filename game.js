@@ -233,4 +233,16 @@ function updateAside() {
     })
 }
 
+// todo updateBoard() fn
+
+function renderAnimals(animal) {
+    const animalContainer = document.querySelector('.player__animals')
+    const newAnimal = document.createElement(`li`)
+    newAnimal
+        .classList.add('player__animal', 'player__' + animal.toString())
+    newAnimal
+        .innerText = animal
+    animalContainer.appendChild(newAnimal)
+}
+
 throwBtn.addEventListener('click', throwDices)
