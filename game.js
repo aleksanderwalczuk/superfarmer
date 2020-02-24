@@ -115,26 +115,8 @@ function throwDices() {
     }
     getResult()
     updateAside()
-    player.animals.countAnimals().map((el, idx) => {
-        if (el === 0) return null
-        switch (idx) {
-            case 0: renderAnimals('rabbit')
-                break;
-            case 1: renderAnimals('sheep')
-                break;
-            case 2: renderAnimals('pig')
-                break;
-            case 3: renderAnimals('cow')
-                break;
-            case 4: renderAnimals('horse')
-                break;
-            case 5: renderAnimals('sDog')
-                break;
-            case 6: renderAnimals('bDog')
-                break
-            default: console.log('el: ', el, 'currentIdx is:', idx)
-        }
-    })
+    resetBoard()
+    render(player)
 }
 
 function exchangePossible(animalsArr) {
@@ -255,14 +237,35 @@ function updateAside() {
 
 // todo updateBoard() fn
 
-function renderAnimals(animal) {
+
+function resetBoard() {
     const animalContainer = document.querySelector('.player__animals')
-    const newAnimal = document.createElement(`li`)
-    newAnimal
-        .classList.add('player__animal', 'player__' + animal.toString())
-    newAnimal
-        .innerText = animal
-    animalContainer.appendChild(newAnimal)
+    animalContainer.innerHTML = ''
+}
+function render(playerObj) {
+
+    function renderAnimals(animal) {
+        const animalContainer = document.querySelector('.player__animals')
+        const newAnimal = document.createElement(`li`)
+        newAnimal
+            .classList.add('player__animal', 'player__' + animal.toString())
+        newAnimal
+            .innerText = animal
+        animalContainer.appendChild(newAnimal)
+    }
+
+    //all animals and methods in arrays
+    const allPlayerAnimalsProperties = Object.entries(playerObj.animals)
+    // slice out the methods, then filter those with zeroes
+    // inner array indexes represents [0] - animalName, [1] - number of these animals
+    const allPlayerAnimals = allPlayerAnimalsProperties.slice(0, 6)
+
+    allPlayerAnimals.forEach(el => {
+        if (el[1] === 0) return
+        for (let i = 0; i < el[1]; i++) {
+            renderAnimals(el[0])
+        }
+    })
 }
 
 throwBtn.addEventListener('click', throwDices)
