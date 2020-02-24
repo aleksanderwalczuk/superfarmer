@@ -9,6 +9,7 @@
   width: 100vw;
   padding: 2rem;
   list-style: none;
+  flex-wrap: wrap;
   display: flex;
   justify-content: normal;
   align-items: normal;
@@ -17,7 +18,7 @@
 .player__animal {
   width: 80px;
   height: 50px;
-  margin: 0 5px;
+  margin: 5px;
   border: 1px solid darkgray;
   display: flex;
   justify-content: center;
@@ -33,7 +34,7 @@
   border: 0;
   border-radius: 50%;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: unset;
   left: unset;
   bottom: 1rem;
