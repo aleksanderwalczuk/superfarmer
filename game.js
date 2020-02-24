@@ -117,7 +117,7 @@ function throwDices() {
     updateAside()
     resetBoard()
     render(player)
-    exchangePossible() ? popTradeAvailable() : ''
+    exchangePossible(player.animals.countAnimals()) ? popTradeAvailable() : ''
 }
 
 function toggleDisplay(element, display = 'block') {
