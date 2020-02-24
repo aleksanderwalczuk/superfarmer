@@ -103,11 +103,17 @@ function throwDices() {
 
 function toggleDisplay(element, display = 'block') {
     console.log('current display: ', element.style.display)
-    const conditions = ['none', '']
     return element.style.display = element.style.display === '' ||
         element.style.display === 'none' ?
         element.style.display = display :
         element.style.display = ''
+}
+
+function showModal() {
+    const modalWindow = document.querySelector('article.modal__window')
+    const modalClose = document.querySelector('button.modal__close')
+    toggleDisplay(modalWindow)
+    modalClose.addEventListener('click', toggleDisplay(modalWindow))
 }
 
 function exchangePossible(animalsArr) {
