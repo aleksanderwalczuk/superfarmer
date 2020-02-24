@@ -102,29 +102,34 @@ function throwDices() {
 }
 
 function toggleDisplay(element, display = 'block') {
-    const currentSetting = element.style.display
-    currentSetting === display ? 'none' : display
+    console.log('current display: ', element.style.display)
+    const conditions = ['none', '']
+    return element.style.display = element.style.display === '' ||
+        element.style.display === 'none' ?
+        element.style.display = display :
+        element.style.display = ''
 }
-
 
 function exchangePossible(animalsArr) {
 
+    const exchangeBtn = document.querySelector('button.btn__trade')
+
     function popTradeAvailable() {
-        console.log('this is a trade window')
+        exchangeBtn.style.display = 'block'
     }
 
     //check if any animals
     const noAnimals = animalsArr.every(el => el === 0)
 
-    console.log(noAnimals)
-    if (noAnimals) return console.log('no animals, no exchange')
-
+    if (noAnimals) return toggleDisplay(exchangeBtn, 'none')
     //if other animals than rabbits are in arr it's changeable
     const noRabbits = animalsArr.filter((el, idx) => idx !== 0)
+    console.log('noRab = ', noRabbits)
     if (animalsArr[0] >= 6 || noRabbits.find(el => el > 0)) {
         console.log('changeable')
         return popTradeAvailable()
     }
+
 }
 
 function trade(animal, num, outcomeName) {
