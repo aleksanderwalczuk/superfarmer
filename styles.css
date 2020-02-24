@@ -41,4 +41,40 @@
   right: 3rem;
 }
 
+.modal__window {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.modal__container {
+  position: relative;
+  height: 70vh;
+  width: 80vw;
+}
+.modal__header {
+  text-align: center;
+  text-transform: capitalize;
+}
+.modal__close {
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  left: unset;
+  bottom: unset;
+  right: 1rem;
+}
+.modal__close:hover {
+  color: orange;
+}
+
 /*# sourceMappingURL=styles.css.map */

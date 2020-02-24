@@ -43,3 +43,30 @@
         text-align: center
         @include pos(fixed)
         @include posBR(1rem, 3rem)
+
+.modal
+    &__window
+        width: 100vw
+        height: 100vh
+        @include pos(absolute, 0, 0)
+        @include flex(center, center)
+
+    &__container
+        position: relative
+        height: 70vh
+        width: 80vw
+
+    &__header
+        text-align: center
+        text-transform: capitalize
+
+    &__close
+        font-weight: bold
+        border: none
+        background: transparent
+        font-size: 1rem
+        cursor: pointer
+        @include pos(absolute, .5rem)
+        @include posBR(unset, 1rem)
+        &:hover
+            color: orange
