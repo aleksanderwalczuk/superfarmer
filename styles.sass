@@ -1,0 +1,32 @@
+@mixin flex($justify: normal, $align: normal, $col:row)
+    display: flex
+    justify-content: $justify
+    align-items: $align
+    flex-direction: $col
+
+@mixin pos($pos: static, $top: unset, $left: unset)
+    position: $pos
+    top: $top
+    left: $left
+
+@mixin posBR($bot: unset, $right: unset)
+    bottom: $bot
+    right: $right
+
+.useranimals
+    &__container
+        @include flex(space-around, center)
+
+.player
+    &__animals
+        width: 100vw
+        padding: 2rem
+        list-style: none
+        @include flex()
+
+    &__animal
+        width: 80px
+        height: 50px
+        margin: 0 5px
+        border: 1px solid darkgray
+        @include flex(center, center)
