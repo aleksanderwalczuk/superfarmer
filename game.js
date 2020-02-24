@@ -133,71 +133,49 @@ function exchangePossible(animalsArr) {
     }
 }
 
-function tradeRabbits(num, outcomeName) {
-    const rabbitTradeTree = {
-        sheep: num / 6,
-        sDog: num / 6,
-        pig: num / 12,
-        cow: num / 36,
-        bDog: num / 36,
-        horse: num / 72
+function trade(animal, num, outcomeName) {
+    const tradeTree = {
+        rabbit: {
+            sheep: num / 6,
+            sDog: num / 6,
+            pig: num / 12,
+            cow: num / 36,
+            bDog: num / 36,
+            horse: num / 72
+        },
+        sheep: {
+            rabbit: num * 6,
+            sDog: num,
+            pig: num / 2,
+            cow: num / 6,
+            bDog: num / 6,
+            horse: num / 12
+        }, pig: {
+            rabbit: num * 12,
+            sDog: num * 2,
+            sheep: num * 2,
+            cow: num / 3,
+            bDog: num / 3,
+            horse: num / 6
+        }, cow: {
+            rabbit: num * 36,
+            sDog: num * 6,
+            sheep: num * 6,
+            pig: num * 3,
+            bDog: num,
+            horse: num / 2
+        }, horse: {
+            rabbit: num * 72,
+            sDog: num * 12,
+            sheep: num * 12,
+            pig: num * 6,
+            bDog: num * 2,
+            cow: num * 2
+        }
     }
-    console.log(rabbitTradeTree[outcomeName])
-    player.animals.rabbit -= num
+    player.animals[animal] -= num
     //todo make sure num is an integer and modulo is 0
-    return player.animals[outcomeName] += rabbitTradeTree[outcomeName]
-}
-
-function tradeSheeps(num, outcomeName) {
-    const sheepTradeTree = {
-        rabbit: num * 6,
-        sDog: num,
-        pig: num / 2,
-        cow: num / 6,
-        bDog: num / 6,
-        horse: num / 12
-    }
-    player.animals.sheep -= num
-    return player.animals[outcomeName] += sheepTradeTree[outcomeName]
-}
-
-function tradePig(num, outcomeName) {
-    const pigTradeTree = {
-        rabbit: num * 12,
-        sDog: num * 2,
-        sheep: num * 2,
-        cow: num / 3,
-        bDog: num / 3,
-        horse: num / 6
-    }
-    player.animals.pig -= num
-    return player.animals[outcomeName] += pigTradeTree[outcomeName]
-}
-
-function tradeCow(num, outcomeName) {
-    const cowTradeTree = {
-        rabbit: num * 36,
-        sDog: num * 6,
-        sheep: num * 6,
-        pig: num * 3,
-        bDog: num,
-        horse: num / 2
-    }
-    player.animals.cow -= num
-    return player.animals[outcomeName] += cowTradeTree[outcomeName]
-}
-
-function tradeHorse(num, outcomeName) {
-    const cowTradeTree = {
-        rabbit: num * 72,
-        sDog: num * 12,
-        sheep: num * 12,
-        pig: num * 6,
-        bDog: num * 2,
-        cow: num * 2
-    }
-    player.animals.cow -= num
-    return player.animals[outcomeName] += cowTradeTree[outcomeName]
+    return player.animals[outcomeName] += tradeTree[animal][outcomeName]
 }
 
 const player = {
