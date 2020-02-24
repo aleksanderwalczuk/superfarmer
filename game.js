@@ -112,16 +112,17 @@ function toggleDisplay(element, display = 'block') {
 function showModal() {
     const modalWindow = document.querySelector('article.modal__window')
     const modalClose = document.querySelector('button.modal__close')
-    toggleDisplay(modalWindow)
-    modalClose.addEventListener('click', toggleDisplay(modalWindow))
+    toggleDisplay(modalWindow, 'flex')
+    modalClose.addEventListener('click', () => modalWindow.style.display = 'none')
 }
 
 function exchangePossible(animalsArr) {
 
     const exchangeBtn = document.querySelector('button.btn__trade')
-
+    const activeListeners = []
     function popTradeAvailable() {
         exchangeBtn.style.display = 'block'
+
     }
 
     //check if any animals
@@ -129,6 +130,10 @@ function exchangePossible(animalsArr) {
 
     if (noAnimals) return toggleDisplay(exchangeBtn, 'none')
     //if other animals than rabbits are in arr it's changeable
+    if (activeListeners.length === 0) {
+        const exchangeBtnListener = exchangeBtn.addEventListener('click', showModal)
+        activeListeners.push(exchangeBtnListener)
+    }
     const noRabbits = animalsArr.filter((el, idx) => idx !== 0)
     console.log('noRab = ', noRabbits)
     if (animalsArr[0] >= 6 || noRabbits.find(el => el > 0)) {
