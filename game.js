@@ -120,6 +120,10 @@ function throwDices() {
     exchangePossible() ? popTradeAvailable() : ''
 }
 
+function toggleDisplay(element, display = 'block') {
+    const currentSetting = element.style.display
+    currentSetting === display ? 'none' : display
+}
 function popTradeAvailable() {
     console.log('this is a trade window')
 }
