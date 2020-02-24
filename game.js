@@ -129,7 +129,8 @@ function exchangePossible(animalsArr) {
     //if other animals than rabbits are in arr it's changeable
     const noRabbits = animalsArr.filter((el, idx) => idx !== 0)
     if (animalsArr[0] >= 6 || noRabbits.find(el => el > 0)) {
-        return console.log('changeable')
+        console.log('changeable')
+        return true
     }
 }
 
