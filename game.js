@@ -84,26 +84,7 @@ function throwDices() {
             case player.animals[dice2] > 0: grow(dice2)
                 break
         }
-        // if (dice1 === 'wolf') {
-        //     return wolfAttack()
-        // }
-        // if (dice2 === 'fox') {
-        //     return foxAttack()
-        // }
 
-        // if (dice1 === dice2) {
-        //     console.log('add animal: ', dice1)
-        //     grow(dice1)
-        // }
-
-        // if (player.animals[dice1] > 0) {
-        //     return grow(dice1)
-        // }
-
-        // if (player.animals[dice2] > 0) {
-        //     return grow(dice1)
-
-        // }
         console.table(dice1, dice2)
         return player.active = !player.active
 
