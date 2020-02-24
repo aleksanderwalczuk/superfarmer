@@ -117,18 +117,21 @@ function throwDices() {
     updateAside()
     resetBoard()
     render(player)
-    exchangePossible(player.animals.countAnimals()) ? popTradeAvailable() : ''
+    exchangePossible(player.animals.countAnimals())
 }
 
 function toggleDisplay(element, display = 'block') {
     const currentSetting = element.style.display
     currentSetting === display ? 'none' : display
 }
-function popTradeAvailable() {
-    console.log('this is a trade window')
-}
+
 
 function exchangePossible(animalsArr) {
+
+    function popTradeAvailable() {
+        console.log('this is a trade window')
+    }
+
     //check if any animals
     const noAnimals = animalsArr.every(el => el === 0)
 
@@ -139,7 +142,7 @@ function exchangePossible(animalsArr) {
     const noRabbits = animalsArr.filter((el, idx) => idx !== 0)
     if (animalsArr[0] >= 6 || noRabbits.find(el => el > 0)) {
         console.log('changeable')
-        return true
+        return popTradeAvailable()
     }
 }
 
