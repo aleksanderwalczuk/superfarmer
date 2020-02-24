@@ -115,6 +115,26 @@ function throwDices() {
     }
     getResult()
     updateAside()
+    player.animals.countAnimals().map((el, idx) => {
+        if (el === 0) return null
+        switch (idx) {
+            case 0: renderAnimals('rabbit')
+                break;
+            case 1: renderAnimals('sheep')
+                break;
+            case 2: renderAnimals('pig')
+                break;
+            case 3: renderAnimals('cow')
+                break;
+            case 4: renderAnimals('horse')
+                break;
+            case 5: renderAnimals('sDog')
+                break;
+            case 6: renderAnimals('bDog')
+                break
+            default: console.log('el: ', el, 'currentIdx is:', idx)
+        }
+    })
 }
 
 function exchangePossible(animalsArr) {
