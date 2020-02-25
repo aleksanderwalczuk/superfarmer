@@ -1,15 +1,20 @@
-/**
- * Created by alexander on 12/1/18.
- */
-const board = document.getElementById('board');
-let round = 0;
-const diceOneAnimals = ["rabbit", "sheep", "pig", "horse", "fox"]; //["r", "s,", "p", "c", "w"];
-const diceTwoAnimals = ["rabbit", "sheep", "pig", "horse", "fox"]; //["r", "s,", "p", "h", "f"];
-const dogs = ["big", "small"];
+class Player {
+    constructor(name, active) {
 
-function rollDice(diceOneAnimals, diceTwoAnimals) {
-    const rollOne = Math.floor(Math.random * diceOneAnimals.length);
-    const rollTwo = Math.floor(Math.random * diceTwoAnimals.length);
-    console.log("dice 1" + rollOne + "dice 2 " + rollTwo);
-    return rollOne + rollTwo;
+        name = this.name,
+            //I
+            active = this.active
+    }
+    animals = {
+        rabbit: 0,
+        sheep: 0,
+        pig: 0,
+        cow: 0,
+        horse: 0,
+        sDog: 0,
+        bDog: 0,
+    }
+    countAnimals() {
+        return Object.values(this.animals)
+    }
 }
