@@ -31,14 +31,37 @@ class Board {
 class Game {
     yellowDice = ["wolf", "cow", "sheep", "sheep", "sheep", "pig", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"]
     redDice = ["fox", "horse", "pig", "pig", "sheep", "sheep", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"];
+    players = []
 
     init() {
+        //todo welcome screen where user can set num of players
+        //todo so there will appear up to 4 inputs for their names
+        //todo onSubmit they are added to players arr in game obj
+        function clearModalContent() {
+            return document.querySelector('.modal__content').innerHTML = ''
+        }
+        function createPlayersNamesInput(num = 1) {
+            let output = ''
+            for (let i = 0; i < num; i++) {
+                output += `<div class="player__input player__name">
+                <label for="player${i}Name">Player ${i + 1} name:</label>
+            <input type="text" name="playerName" id="player${i}">
+            </div>`
+            }
+            return output
+        }
+
         const welcomeMessage = 'Please type your name'
         const modalContent = document.createElement('div')
-        modalContent.classList.add('modal__content--initial')
-        const initHTMLContent = `<label for="playerName">Your name:</label>
-        <input type="text" name="playerName" id="">`
+        modalContent.classList.add('modal__content modal__content--initial')
+        const modalHTMLContent = `<form>
+        ${createPlayersNamesInput()}
+        </form>
+        <button class="modal__btn" id="submitPlayerName">confirm</button>
+        `
+        modalContent.innerHTML = modalHTMLContent
         this.showModal(welcomeMessage, modalContent)
+
     }
 
     showModal(title = 'exchange animals', content = document.createElement('')) {
