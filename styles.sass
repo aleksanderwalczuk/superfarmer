@@ -48,14 +48,17 @@
     &__window
         width: 100vw
         height: 100vh
+        background-color: #000000d7
         @include pos(absolute, 0, 0)
         @include flex(center, center)
+        //I
         display: none
-        
+
     &__container
         position: relative
         height: 70vh
         width: 80vw
+        background-color: #fff
 
     &__header
         text-align: center
@@ -67,7 +70,7 @@
         background: transparent
         font-size: 1rem
         cursor: pointer
-        @include pos(absolute, .5rem)
+        @include pos(absolute, 1rem)
         @include posBR(unset, 1rem)
         &:hover
             color: orange
