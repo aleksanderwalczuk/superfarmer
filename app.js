@@ -45,22 +45,35 @@ class Game {
             for (let i = 0; i < num; i++) {
                 output += `<div class="player__input player__name">
                 <label for="player${i}Name">Player ${i + 1} name:</label>
-            <input type="text" name="playerName" id="player${i}">
+            <input type="text" data-name="player${i}" name="playerName" id="player${i}">
             </div>`
             }
             return output
         }
 
+        const setPlayerName = (e) => {
+            e.preventDefault() //no reload on submit
+            const playerInput = e.target.querySelector('input') //get input
+            const playerName = playerInput.value
+            // create new player using
+            if (!playerName) return
+            this.players.push(new Player(playerName, false))
+            playerInput.value = ''
+        }
+
         const welcomeMessage = 'Please type your name'
         const modalContent = document.createElement('div')
         modalContent.classList.add('modal__content--initial', 'modal__content')
-        const modalHTMLContent = `<form>
+        const modalHTMLContent = `<form class="modal__form modal__form--playerName">
         ${createPlayersNamesInput()}
+        <button type="submit" class="modal__btn" id="submitPlayerName">confirm</button>
         </form>
-        <button class="modal__btn" id="submitPlayerName">confirm</button>
         `
         modalContent.innerHTML = modalHTMLContent
         this.showModal(welcomeMessage, modalContent)
+        const btnListener = () => document.querySelector('form.modal__form--playerName').addEventListener('submit', setPlayerName)
+        btnListener()
+        console.log(btnListener())
 
     }
 
