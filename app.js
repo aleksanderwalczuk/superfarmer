@@ -53,7 +53,7 @@ class Game {
 
         const welcomeMessage = 'Please type your name'
         const modalContent = document.createElement('div')
-        modalContent.classList.add('modal__content modal__content--initial')
+        modalContent.classList.add('modal__content--initial', 'modal__content')
         const modalHTMLContent = `<form>
         ${createPlayersNamesInput()}
         </form>
