@@ -1,9 +1,8 @@
 class Player {
     constructor(name, active) {
 
-        name = this.name,
-            //I
-            active = this.active
+        this.name = name
+        this.active = active
     }
     animals = {
         rabbit: 0,
@@ -16,5 +15,11 @@ class Player {
     }
     countAnimals() {
         return Object.values(this.animals)
+    }
+}
+
+class Board {
+    constructor(domId) {
+        this.domId = domId
     }
 }
