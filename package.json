@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass --include-path sass styles.sass   styles.css"
+    "build-css": "sass styles.sass styles.css --watch"
   },
   "keywords": [
     "farmer",
