@@ -59,6 +59,9 @@ class Game {
             if (!playerName) return
             this.players.push(new Player(playerName, false))
             playerInput.value = ''
+            // show instructions
+            clearModalContent()
+            this.showInstructions()
         }
 
         const welcomeMessage = 'Please type your name'
@@ -73,8 +76,6 @@ class Game {
         this.showModal(welcomeMessage, modalContent)
         const btnListener = () => document.querySelector('form.modal__form--playerName').addEventListener('submit', setPlayerName)
         btnListener()
-        console.log(btnListener())
-
     }
 
     showModal(title = 'exchange animals', content = document.createElement('')) {
@@ -161,6 +162,27 @@ class Game {
         getResult()
 
     }
+
+    showInstructions() {
+        const instructionsP1 = `<p>In Superfarmer, each player takes a role of the owner of the animal farm.
+            The main goal is to breed, exchange and gather different animals (rabbit, sheep, pig, cow, horse and two kinds of dogs)
+            and the winner is a person who can gather at least one of each kind (except the dogs). But be careful there are foxes
+            around trying to snatch your rabbits and wolves which can eat all your other animals (that is why you need dogs to protect your herd).
+            </p>`
+
+        const instructionsP2 = `<p>The turn of each player consists of two actions: first you have a possibility
+            to exchange your animals according to the special table (e.g for six rabbits you get one sheep, three pigs for a cow)
+            and then you roll two special 12-sided dice with the pictures of animals on the sides.
+            You count the number of pairs of the animals on rolled dice (together with the ones on the farm) and this is how many new animals you get,
+            divided by two. The trick is that there is a fox on one dice and the wolf which are eating your animals.
+            </p>
+        `
+        const modalContent = document.createElement('div')
+        modalContent.classList.add('modal__content', 'modal__content--instruction')
+        modalContent.innerHTML = instructionsP1 + instructionsP2
+        this.showModal('Instructions', modalContent)
+    }
+
     wolfAttack() {
 
         console.log('wolf attacks')
