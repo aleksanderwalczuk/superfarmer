@@ -85,7 +85,11 @@ class Game {
         modalWindow.lastElementChild.appendChild(content)
         modalHeader.innerText = title
         modalWindow.style.display = 'flex'
-        modalClose.addEventListener('click', () => modalWindow.style.display = 'none')
+        modalClose.addEventListener('click', (this.closeModal))
+    }
+
+    closeModal() {
+        document.querySelector('article.modal__window').style.display = 'none'
     }
 
     throwDices() {
@@ -177,10 +181,14 @@ class Game {
             divided by two. The trick is that there is a fox on one dice and the wolf which are eating your animals.
             </p>
         `
+
+        const instructionBtn = '<button id="instructionCloseBtn">Close</button>'
         const modalContent = document.createElement('div')
+
         modalContent.classList.add('modal__content', 'modal__content--instruction')
-        modalContent.innerHTML = instructionsP1 + instructionsP2
+        modalContent.innerHTML = instructionsP1 + instructionsP2 + instructionBtn
         this.showModal('Instructions', modalContent)
+        document.getElementById('instructionCloseBtn').addEventListener('click', this.closeModal)
     }
 
     wolfAttack() {
