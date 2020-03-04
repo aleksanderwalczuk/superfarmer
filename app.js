@@ -1,9 +1,12 @@
+//todo: render players animals
+//todo: fix grow func, sometimes return 1.5 animal
 class Player {
     constructor(name, active) {
 
         this.name = name;
         this.active = active
     }
+
     animals = {
         rabbit: 0,
         sheep: 0,
@@ -13,6 +16,7 @@ class Player {
         sDog: 0,
         bDog: 0,
     };
+
     countAnimals() {
         return Object.values(this.animals)
     }
@@ -23,14 +27,21 @@ class Board {
         this.domId = domId;
         this.playersNum = playersNum
     }
+
     getDomId() {
         return this.domId = document.getElementById('board')
     }
 }
 
 class Game {
-    yellowDice = ["wolf", "cow", "sheep", "sheep", "sheep", "pig", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"];
-    redDice = ["fox", "horse", "pig", "pig", "sheep", "sheep", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"];
+    static yellowDice() {
+        return ["wolf", "cow", "sheep", "sheep", "sheep", "pig", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"];
+    }
+
+    static redDice() {
+        return ["fox", "horse", "pig", "pig", "sheep", "sheep", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit", "rabbit"];
+    }
+
     players = [];
 
     init() {
@@ -40,6 +51,7 @@ class Game {
         function clearModalContent() {
             return document.querySelector('.modal__content').innerHTML = ''
         }
+
         function createPlayersNamesInput(num = 1) {
             let output = '';
             for (let i = 0; i < num; i++) {
@@ -61,7 +73,8 @@ class Game {
             playerInput.value = '';
             // show instructions
             clearModalContent();
-            this.showInstructions()
+            this.showInstructions();
+            this.startGame()
         };
 
         const welcomeMessage = 'Please type your name';
@@ -93,6 +106,14 @@ class Game {
     }
 
     throwDices() {
+        const diceA = Game.yellowDice();
+        console.log(diceA);
+        const diceB = Game.redDice();
+        // uncomment following if multiplayer
+        // const player = start.players.find(el => el.active);
+        const player = start.players[0]
+        console.log(player);
+
 
         function throwDice(dice) {
             const equation = Math.abs(Math.floor(Math.random() * dice.length - 1));
@@ -102,7 +123,7 @@ class Game {
         function compareDices(dice1, dice2) {
 
             function grow(animalName, addOne = false) {
-
+                // console.log(/)
                 const animalNum = player.animals[animalName];
                 console.log('animalN', animalNum, addOne);
                 if (addOne && animalNum === 0 || animalNum <= 1) {
@@ -112,43 +133,46 @@ class Game {
                     return player.animals[animalName] += (player.animals[animalName] + 1) / 2
                 }
                 if (addOne && player.animals[animalName] > 1 && player.animals[animalName % 2 !== 0]) {
-                    return player.animals[animalName] += (parseInt((player.animals[animalName]) )- 1) / 2 + 1
+                    return player.animals[animalName] += (parseInt((player.animals[animalName])) - 1) / 2 + 1
                 }
                 if (addOne && player.animals[animalName] > 1) {
-                    return player.animals[animalName] += parseInt(player.animals[animalName]) / 2 + 1
+                    return player.animals[animalName] += (parseInt(player.animals[animalName]) / 2 + 1)
                 }
                 return console.log(player.animals[animalName] += parseInt(player.animals[animalName]) / 2)
             }
 
             switch (true) {
                 case dice1 === 'wolf' && dice2 === 'fox':
-                    wolfAttack();
-                    foxAttack();
+                    start.wolfAttack();
+                    start.foxAttack();
                     break;
                 case dice1 === 'wolf' && player.animals[dice2] > 0:
                     grow(dice2);
-                    wolfAttack();
+                    start.wolfAttack();
                     break;
                 case dice1 === 'wolf' && player.animals[dice2] === 0:
-                    wolfAttack();
+                    start.wolfAttack();
                     break;
                 case dice2 === 'fox' && player.animals[dice1] > 0:
                     grow(dice1);
-                    foxAttack();
+                    start.foxAttack();
                     break;
                 case dice2 === 'fox' && player.animals[dice1] === 0:
-                    foxAttack();
+                    start.foxAttack();
                     break;
-                case dice1 === dice2: grow(dice1, true);
+                case dice1 === dice2:
+                    grow(dice1, true);
                     console.log('dice match');
                     break;
                 case player.animals[dice1] > 0 && player.animals[dice2] > 0:
                     grow(dice1);
                     grow(dice2);
                     break;
-                case player.animals[dice1] > 0: grow(dice1);
+                case player.animals[dice1] > 0:
+                    grow(dice1);
                     break;
-                case player.animals[dice2] > 0: grow(dice2);
+                case player.animals[dice2] > 0:
+                    grow(dice2);
                     break
             }
 
@@ -158,9 +182,10 @@ class Game {
         }
 
         function getResult() {
-            const diceResults = [throwDice(yellowDice), throwDice(redDice)];
+            const diceResults = [throwDice(diceA), throwDice(diceB)];
             compareDices(diceResults[0], diceResults[1]);
-            console.log(player)
+            console.log(player);
+            start.render()
         }
 
         getResult()
@@ -194,6 +219,9 @@ class Game {
     wolfAttack() {
 
         console.log('wolf attacks');
+
+        const player = start.players[0]
+
         function clearAnimals() {
             player.animals.sheep = 0;
             player.animals.pig = 0;
@@ -208,12 +236,25 @@ class Game {
 
     foxAttack() {
 
+        const player = start.players[0]
+
         console.log('fox attacks');
 
         if (player.animals.sDog) {
             return player.animals.sDog--
         }
         return player.animals.rabbit = 0
+    }
+
+    startGame() {
+        const throwBtn = document.getElementById('throwDices');
+        throwBtn.addEventListener('click', this.throwDices);    // listen for btn click
+        start.players[0].active = true; //set first player as active
+        console.log('success')
+    }
+
+    render() {
+        console.log('render animals, update board state')
     }
 
 }
