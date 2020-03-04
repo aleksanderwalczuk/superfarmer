@@ -152,14 +152,14 @@ class Game {
                     break
             }
 
-            console.table(dice1, dice2)
+            console.table(dice1, dice2);
             return player.active = !player.active
 
         }
 
         function getResult() {
-            const diceResults = [throwDice(yellowDice), throwDice(redDice)]
-            compareDices(diceResults[0], diceResults[1])
+            const diceResults = [throwDice(yellowDice), throwDice(redDice)];
+            compareDices(diceResults[0], diceResults[1]);
             console.log(player)
         }
 
@@ -193,10 +193,10 @@ class Game {
 
     wolfAttack() {
 
-        console.log('wolf attacks')
+        console.log('wolf attacks');
         function clearAnimals() {
-            player.animals.sheep = 0
-            player.animals.pig = 0
+            player.animals.sheep = 0;
+            player.animals.pig = 0;
             player.animals.cow = 0
         }
 
