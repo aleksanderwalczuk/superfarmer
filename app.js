@@ -1,5 +1,6 @@
 //todo: render players animals
 //todo: fix grow func, sometimes return 1.5 animal
+//update grow() seems to return fine values
 class Player {
     constructor(name, active) {
 
@@ -107,12 +108,10 @@ class Game {
 
     throwDices() {
         const diceA = Game.yellowDice();
-        console.log(diceA);
         const diceB = Game.redDice();
         // uncomment following if multiplayer
         // const player = start.players.find(el => el.active);
         const player = start.players[0]
-        console.log(player);
 
 
         function throwDice(dice) {
@@ -123,7 +122,7 @@ class Game {
         function compareDices(dice1, dice2) {
 
             function grow(animalName, addOne = false) {
-                // console.log(/)
+                console.log(start.players[0].animals)
                 const animalNum = player.animals[animalName];
                 console.log('animalN', animalNum, addOne);
                 if (addOne && animalNum === 0 || animalNum <= 1) {
@@ -250,7 +249,6 @@ class Game {
         const throwBtn = document.getElementById('throwDices');
         throwBtn.addEventListener('click', this.throwDices);    // listen for btn click
         start.players[0].active = true; //set first player as active
-        console.log('success')
     }
 
     render() {
