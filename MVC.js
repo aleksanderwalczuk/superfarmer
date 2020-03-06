@@ -1,6 +1,6 @@
 const Controller = {
         initialization: function () {
-            if (Module.initialization.data.welcomeScreen.welcomeScreenShown === 0) {
+            if (!Module.initialization.data.welcomeScreen.welcomeScreenShown) {
                 Module.initialization.showWelcomeScreen()
             }
         }
@@ -11,12 +11,12 @@ const Module = {
     initialization: {
         data: {
             welcomeScreen: {
-                welcomeScreenShown: 0
+                welcomeScreenShown: false
             }
         },
         showWelcomeScreen: function () {
             Render.sayHello();
-            return Module.initialization.data.welcomeScreen.welcomeScreenShown += 1
+            return Module.initialization.data.welcomeScreen.welcomeScreenShown = true
         }
     }
 
