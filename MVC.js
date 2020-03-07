@@ -7,6 +7,9 @@ const Controller = {
             Module.loadData() || Module.saveGameData();
             Render.handlePlayersNum()
         },
+        setPlayers: function () {
+            console.log('this log is from controller setPlayers')
+        }
     }
 ;
 
@@ -54,8 +57,17 @@ const Render = {
     sayHello: function () {
         return console.log('hello');
     },
+    clearModalContent: function() {
+        document.querySelector('.modal__heading').textContent = '';
+        document.querySelector('.modal__form').innerHTML = '';
+    },
     handlePlayersNum: function () {
         //modal where user can set num of players
+
+        //reset numOf players
+        Module.data.players.num = 0;
+
+        // declare dom elements
         const modalWrapper = document.querySelector('.modal__wrapper');
         const modalHeading = modalWrapper.querySelector('.modal__heading');
         const btnIncrease = modalWrapper.querySelector('.players__btn--increase');
@@ -68,13 +80,16 @@ const Render = {
         function updatePlayerCounter() {
             modalWrapper.querySelector('.players__number').textContent = Module.data.players.num.toString()
         }
-
+        // final function in this handler
+        //executes handlePlayersNames on Submit
         function setPlayersNum(e) {
             e.preventDefault();
             const players = Module.data.players.num;
             //todo: change alert to a separate fn
             if (players === 0) return alert('players can\'t be 0');
-            console.log('submitted players num: ' + players)
+            console.log('submitted players num: ' + players);
+            Render.clearModalContent();
+            Controller.setPlayers()
         }
 
         // add listeners
