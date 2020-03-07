@@ -11,16 +11,22 @@
 <body>
 <div class="modal__wrapper">
     <div class="modal__container">
-        <h2 class="modal__heading">Set number of players</h2>
+        <h2 class="modal__heading"></h2>
         <div class="modal__content">
             <div class="modal__players">
-                <button class="modal__btn players__btn players__btn--increase">+</button>
-                <button class="modal__btn players__btn players__btn--decrease">-</button>
+                <form action="" class="modal__form">
+                    <div class="counter__container">
+                        <button type="button" class="modal__btn players__btn players__btn--decrease">-</button>
+                        <span class="players__number"></span>
+                        <button type="button" class="modal__btn players__btn players__btn--increase">+</button>
+                    </div>
+                    <button type="submit" class="modal__btn counter__submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-    <script src="MVC.js"></script>
+<script src="MVC.js"></script>
 </body>
 
 </html>
