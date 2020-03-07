@@ -125,7 +125,8 @@ const Render = {
     },
 
     getPlayersNames() {
-
+    // create modal here
+    //    get values, return them as an array to the module on submit
     }
 };
 
