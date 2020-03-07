@@ -32,7 +32,7 @@ const Module = {
     },
 
     loadData: function () {
-        const gameData = localStorage.getItem(JSON.parse('FarmerGame')) || 0
+        const gameData = JSON.parse(localStorage.getItem('FarmerGame')) || 0;
         if(gameData === 0) return false;
         Module.data = gameData;
         Module.data.loaded = true
