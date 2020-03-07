@@ -31,7 +31,8 @@ const Module = {
         players:
             {
                 num: 0,
-                data: []
+                data: [],
+                names: []
             }
     },
 
@@ -55,10 +56,36 @@ const Module = {
             //    get from render
             //    set as arr of objs containing name and id
             //    save game data
-
+        },
+        setPlayersData: function(arr) {
+            if ( typeof arr !== 'object') {
+                throw new Error('players data is not an array')
+            }
+            function createPlayer(name) {
+                const playerName = name.toString();
+                if (playerName.length <= 0 || playerName.length > 25) {
+                    throw new Error('Module.createPlayer: playerName is too long/short');
+                }
+                return {
+                    id: btoa(playerName),
+                    name: playerName,
+                    date: Date.now()
+                }
+            }
+            arr.forEach(el => createPlayer(el))
+            Module.saveGameData()
         },
         init: function () {
         //    put all logic from this module here
+            const playersSaved = Module.handlePlayerName.checkPlayers();
+
+            if (playersSaved) {
+            //    ask user for reset or proceed
+            } else {
+                Render.getPlayersNames()
+            //    wait till user types data
+            //    invoke another fn from render
+            }
         }
     }
 
@@ -126,7 +153,11 @@ const Render = {
 
     getPlayersNames() {
     // create modal here
-    //    get values, return them as an array to the module on submit
+    //    get values, set them as an array to the module on submit
+
+    //    call this fn onSubmit
+        const result = ['array with players names'];
+        Module.handlePlayerName.setPlayersData(result)
     }
 };
 
