@@ -8,6 +8,7 @@ const Controller = {
             Render.handlePlayersNum()
         },
         setPlayers: function () {
+            Module.handlePlayerName.init();
             console.log('this log is from controller setPlayers')
         }
     }
@@ -29,10 +30,9 @@ const Module = {
         loaded: false,
         players:
             {
-                num: 0
+                num: 0,
+                data: []
             }
-
-
     },
 
     saveGameData: function () {
@@ -47,9 +47,21 @@ const Module = {
         Module.data.loaded = true
     },
 
-    handlePlayersNum: function () {
+    handlePlayerName: {
+        checkPlayers: function () {
+            if (Module.data.players.data.length === 0) return false
+            //    check if any,
+            //    add reset possibility
+            //    get from render
+            //    set as arr of objs containing name and id
+            //    save game data
 
+        },
+        init: function () {
+        //    put all logic from this module here
+        }
     }
+
 
 };
 
@@ -110,6 +122,10 @@ const Render = {
         btnSubmit.addEventListener('click', setPlayersNum);
         //run counter on init
         updatePlayerCounter()
+    },
+
+    getPlayersNames() {
+
     }
 };
 
