@@ -22,7 +22,8 @@ const Module = {
         welcomeScreen: {
             welcomeScreenShown: false
         },
-        loaded: false
+        loaded: false,
+        players: []
 
     },
 
