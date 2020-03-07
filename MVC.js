@@ -1,23 +1,41 @@
 const Controller = {
         initialization: function () {
-            if (!Module.initialization.data.welcomeScreen.welcomeScreenShown) {
+            if (!Module.data.welcomeScreen.welcomeScreenShown) {
                 Module.initialization.showWelcomeScreen()
             }
-        }
+            // load saved data or saved initial
+            Module.loadData() || Module.saveGameData()
+        },
     }
 ;
 
 const Module = {
     initialization: {
-        data: {
-            welcomeScreen: {
-                welcomeScreenShown: false
-            }
-        },
+
         showWelcomeScreen: function () {
             Render.sayHello();
-            return Module.initialization.data.welcomeScreen.welcomeScreenShown = true
+            return Module.data.welcomeScreen.welcomeScreenShown = true
         }
+    },
+
+    data: {
+        welcomeScreen: {
+            welcomeScreenShown: false
+        },
+        loaded: false
+
+    },
+
+    saveGameData: function () {
+        const gameData = Module.data;
+        localStorage.setItem('FarmerGame', JSON.stringify(gameData))
+    },
+
+    loadData: function () {
+        const gameData = localStorage.getItem(JSON.parse('FarmerGame')) || 0
+        if(gameData === 0) return false;
+        Module.data = gameData;
+        Module.data.loaded = true
     }
 
 };
@@ -28,4 +46,4 @@ const Render = {
     }
 };
 
-Controller.initialization()
+Controller.initialization();
